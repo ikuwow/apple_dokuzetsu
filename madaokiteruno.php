@@ -16,14 +16,11 @@ $to = new TwitterOAuth(
 // array("status"=>"@hogehoge reply","in_reply_to_status_id"=>"0000000000");
 // とする。
 $tweet = 'お兄ちゃん、まだ起きてるの？ 今日はKeynoteはなかったと思うけど。';
-$req = $to->OAuthRequest(
-	"https://api.twitter.com/1.1/statuses/update.json",
-	"POST",
-	array("status"=>"$tweet"));
+$req = $to->post('statuses/update',array('status'=>$tweet));
 // TwitterへPOSTするときのパラメーターなど詳しい情報はTwitterのAPI仕様書を参照してください
 
 // Twitterから返されたJSONをデコードする
-$result = json_decode($req);
+// $result = json_decode($req);
 // JSONの配列（結果）を表示する
 // echo "<pre>";
 // var_dump($result);
