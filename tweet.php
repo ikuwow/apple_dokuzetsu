@@ -46,23 +46,11 @@ $tweet_id = $tw_idx+1; //インデックスを1始まりに
 // var_dump($tweets[$tw_idx]);
 
 // TwitterへPOSTする。パラメーターは配列に格納する
-$req = $to->OAuthRequest(
-  "https://api.twitter.com/1.1/statuses/update.json",
-  "POST",
-  array("status"=>$tweets[$tw_idx]['tweet'])
-);
+$req = $to->post('statuses/update',array('status'=>$tweets[$tw_idx]['tweet']));
+
+// var_dump($req);
 
 // $result = json_decode($req);
-
-// echo "<pre>";
-// var_dump($result);
-
-// ツイート回数を更新
-// $numoftimes = (int) $numoftimes['num'];
-
-// $increment = 'UPDATE tweets SET num_of_times = '
-// ."$numoftimes+1".' WHERE ID = '."$tweetid".' ;';
-// $count_twinum = mysql_query($increment);
 
 $sql = 'UPDATE tweets set num_of_times = :num where ID = :id';
 $stmt = $dbh->prepare($sql);
@@ -75,9 +63,3 @@ if ($stat) {
   print "Cannot incremented.";
 };
 
-/*
-$close_flag = mysql_close($MySQLlink);
-if (!$close_flag) { 
-  die('Cannot disconnect MySQL.');
-}
- */
