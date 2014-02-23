@@ -1,0 +1,10 @@
+<?php
+define('CONSUMER_KEY','consumerkeyconsumerkey');
+define('CONSUMER_SECRET','consumersecretconsumersecretconsumersecret');
+define('ACCESS_TOKEN','accesstokenaccesstokenaccesstokenaccesstokenaccesstokenac');
+define('ACCESS_TOKEN_SECRET','accesstokensecretaccesstokensecret');
+
+define('DB_HOST','localhost');
+define('DB_NAME','db_name');
+define('DB_USER','db_user');
+define('DB_PASSWORD','password');
