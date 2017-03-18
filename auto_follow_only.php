@@ -1,16 +1,19 @@
 <?php
 print date('Y-m-d H:i:s ');
-require_once("config.php");
 
 require "vendor/autoload.php";
 use Abraham\TwitterOAuth\TwitterOAuth;
 
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+
 // OAuthオブジェクト生成
 $to = new TwitterOAuth(
-	CONSUMER_KEY,
-	CONSUMER_SECRET,
-	ACCESS_TOKEN,
-	ACCESS_TOKEN_SECRET);
+	getenv('CONSUMER_KEY'),
+	getenv('CONSUMER_SECRET'),
+	getenv('ACCESS_TOKEN'),
+	getenv('ACCESS_TOKEN_SECRET')
+);
 
 // フォロワーのIDを読み込み
 $followers = $to->get('followers/ids');

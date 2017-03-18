@@ -3,15 +3,17 @@
 print date('Y-m-d H:i:s ');
 
 require_once("functions.php");
-require_once("config.php");
 
 require "vendor/autoload.php";
 use Abraham\TwitterOAuth\TwitterOAuth;
 
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+
 // MySQLに接続
 try {
-    $dsn = 'mysql:host='.DB_HOST.';dbname='.DB_NAME;
-    $dbh = new PDO($dsn,DB_USER,DB_PASSWORD);
+    $dsn = 'mysql:host=' . getenv('DB_HOST') . ';dbname=' . getenv('DB_NAME');
+    $dbh = new PDO($dsn, getenv('DB_USER'), getenv('DB_PASSWORD'));
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     var_dump($e->getMessage());
@@ -20,10 +22,10 @@ try {
 
 // OAuthオブジェクト生成
 $to = new TwitterOAuth(
-	CONSUMER_KEY,
-	CONSUMER_SECRET,
-	ACCESS_TOKEN,
-	ACCESS_TOKEN_SECRET
+	getenv('CONSUMER_KEY'),
+	getenv('CONSUMER_SECRET'),
+	getenv('ACCESS_TOKEN'),
+	getenv('ACCESS_TOKEN_SECRET')
 );
 
 // ツイートを重み付きランダムに取得

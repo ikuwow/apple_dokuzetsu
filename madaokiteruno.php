@@ -1,16 +1,18 @@
 <?php
 
 require "vendor/autoload.php";
-require_once("config.php");
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+
 // OAuthオブジェクト生成
 $to = new TwitterOAuth(
-	CONSUMER_KEY,
-	CONSUMER_SECRET,
-	ACCESS_TOKEN,
-	ACCESS_TOKEN_SECRET
+	getenv('CONSUMER_KEY'),
+	getenv('CONSUMER_SECRET'),
+	getenv('ACCESS_TOKEN'),
+	getenv('ACCESS_TOKEN_SECRET')
 );
 
 // TwitterへPOSTする。パラメーターは配列に格納する
