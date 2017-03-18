@@ -1,5 +1,4 @@
 <?php
-
 require "vendor/autoload.php";
 
 use Abraham\TwitterOAuth\TwitterOAuth;
@@ -7,7 +6,6 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
-// OAuthオブジェクト生成
 $to = new TwitterOAuth(
 	getenv('CONSUMER_KEY'),
 	getenv('CONSUMER_SECRET'),
@@ -15,23 +13,7 @@ $to = new TwitterOAuth(
 	getenv('ACCESS_TOKEN_SECRET')
 );
 
-// TwitterへPOSTする。パラメーターは配列に格納する
-// in_reply_to_status_idを指定するのならば
-// array("status"=>"@hogehoge reply","in_reply_to_status_id"=>"0000000000");
-// とする。
 $tweet = 'お兄ちゃん、まだ起きてるの？ 今日はKeynoteはなかったと思うけど。';
 $req = $to->post('statuses/update',array('status'=>$tweet));
-// TwitterへPOSTするときのパラメーターなど詳しい情報はTwitterのAPI仕様書を参照してください
-
-// Twitterから返されたJSONをデコードする
-// $result = json_decode($req);
-// JSONの配列（結果）を表示する
-// echo "<pre>";
-// var_dump($result);
-
-// $close_flag = mysql_close($MySQLlink);
-// if ($close_flag) {
-	// print('MySQLから切断しました。');
-// }
 
 ?>

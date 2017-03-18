@@ -1,7 +1,5 @@
 <?php
 
-
-
 // 二分探索法
 // なので、オーダーがO(n)からO(log2(n))になる
 function binary_search($needle, $haystack)
@@ -48,7 +46,7 @@ function binary_search($needle, $haystack)
 function calc_lookups($weights){
     $lookup = array();
     $total_weight = 0;
- 
+
     for ($i=0 ; $i < count($weights) ; $i++){
         $total_weight += $weights[$i];
         $lookup[$i] = $total_weight;
@@ -60,9 +58,9 @@ function weighted_random($weights, $lookup = null, $total_weight = null) {
   if ( $lookup == null ) {
     list($lookup, $total_weight) = calc_lookups($weights);
   }
-  
+
   $rand = mt_rand(1,$total_weight);
 
   return binary_search($rand, $lookup);
-   
+
 }

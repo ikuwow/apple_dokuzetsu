@@ -7,7 +7,6 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
-// OAuthオブジェクト生成
 $to = new TwitterOAuth(
 	getenv('CONSUMER_KEY'),
 	getenv('CONSUMER_SECRET'),
@@ -28,11 +27,7 @@ foreach ( $friends->ids as $i => $id) {
 		}
 	}
 }
-// Twitterから返されたJSONをデコードする
-// $result = json_decode($req);
-// JSONの配列（結果）を表示する
-// echo "<pre>";
-// var_dump($result);
+
 print "Unfollowing end. \n";
 
 ?>

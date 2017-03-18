@@ -10,7 +10,6 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
-// MySQLに接続
 try {
     $dsn = 'mysql:host=' . getenv('DB_HOST') . ';dbname=' . getenv('DB_NAME');
     $dbh = new PDO($dsn, getenv('DB_USER'), getenv('DB_PASSWORD'));
@@ -20,7 +19,6 @@ try {
     exit;
 }
 
-// OAuthオブジェクト生成
 $to = new TwitterOAuth(
 	getenv('CONSUMER_KEY'),
 	getenv('CONSUMER_SECRET'),
@@ -28,7 +26,6 @@ $to = new TwitterOAuth(
 	getenv('ACCESS_TOKEN_SECRET')
 );
 
-// ツイートを重み付きランダムに取得
 $stmt = $dbh->query('SELECT * FROM tweets ORDER BY ID');
 
 $tweets = $stmt->fetchAll();
@@ -44,16 +41,9 @@ foreach ($nums as $key => $num) {
 }
 
 $tw_idx = weighted_random($weights);
-$tweet_id = $tw_idx+1; //インデックスを1始まりに
+$tweet_id = $tw_idx+1;
 
-// var_dump($tweets[$tw_idx]);
-
-// TwitterへPOSTする。パラメーターは配列に格納する
 $req = $to->post('statuses/update',array('status'=>$tweets[$tw_idx]['tweet']));
-
-// var_dump($req);
-
-// $result = json_decode($req);
 
 $sql = 'UPDATE tweets set num_of_times = :num where ID = :id';
 $stmt = $dbh->prepare($sql);

@@ -9,7 +9,6 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
-// OAuthオブジェクト生成
 $to = new TwitterOAuth(
 	getenv('CONSUMER_KEY'),
 	getenv('CONSUMER_SECRET'),
@@ -17,14 +16,10 @@ $to = new TwitterOAuth(
 	getenv('ACCESS_TOKEN_SECRET')
 );
 
-// フォローしているアカウントのIDを読み込み
 $friends_ids = $to->get('friends/ids');
-// $friends_list= $to->get('friends/list');
 
-// フォロワーの情報を読込み
 $followers_list = $to->get('followers/list');
 
-// カウンタの初期化
 $cnt_f = 0;
 $cnt_r = 0;
 
@@ -35,8 +30,8 @@ $pokes = array(
 
 // フォロワーごとに回す
 foreach ( $followers_list->users as $itr => $usr) {
-	$cond = ( empty($friends_ids->ids) || !in_array($usr->id, $friends_ids->ids) )//
-		&& !($usr->protected); 
+	$cond = ( empty($friends_ids->ids) || !in_array($usr->id, $friends_ids->ids) )
+		&& !($usr->protected);
 	if ($cond) {
  		$req_f = $to->post('friendships/create', ['user_id' => $usr->id]);
  		if ($req_f) {
