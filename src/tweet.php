@@ -1,11 +1,10 @@
 <?php
 require '_common.php';
+require '_functions.php';
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 print date('Y-m-d H:i:s ');
-
-require_once("functions.php");
 
 try {
     $dsn = 'mysql:host=' . getenv('DB_HOST') . ';dbname=' . getenv('DB_NAME');
