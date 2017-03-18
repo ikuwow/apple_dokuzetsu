@@ -17,18 +17,18 @@ $followers = $to->get('followers/ids');
 $friends = $to->get('friends/ids');
 
 $counter = 0;
-foreach ( $followers->ids as $i => $id) {
+foreach ($followers->ids as $i => $id) {
     if (empty($friends->ids) or !in_array($id, $friends->ids)) {
         $req = $to->post('friendships/create', array('user_id' => $id));
         if ($req) {
             $counter = $counter +1;
         }
     }
-    if ($counter ==30) break;
+    if ($counter == 30) {
+        break;
+    }
 }
 
 print "Auto followed $counter user(s). \n";
 $result = json_decode($req);
 var_dump($result);
-
-?>

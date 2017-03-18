@@ -33,22 +33,21 @@ $max_weight = max($nums);
 
 $weights = array();
 foreach ($nums as $key => $num) {
-  $weights[$key] = $max_weight-$num+1;
+    $weights[$key] = $max_weight-$num+1;
 }
 
 $tw_idx = weighted_random($weights);
 $tweet_id = $tw_idx+1;
 
-$req = $to->post('statuses/update',array('status'=>$tweets[$tw_idx]['tweet']));
+$req = $to->post('statuses/update', array('status'=>$tweets[$tw_idx]['tweet']));
 
 $sql = 'UPDATE tweets set num_of_times = :num where ID = :id';
 $stmt = $dbh->prepare($sql);
 $stat = $stmt->execute(array(':num'=>$tweets[$tw_idx]['num_of_times']+1,':id'=>$tweet_id));
 
 if ($stat) {
-  $tmp = $tweets[$tw_idx]['num_of_times'] +1;
-  print "Tweet $tweet_id was incremented to $tmp.\n";
+    $tmp = $tweets[$tw_idx]['num_of_times'] +1;
+    print "Tweet $tweet_id was incremented to $tmp.\n";
 } else {
-  print "Cannot incremented.";
-};
-
+    print "Cannot incremented.";
+}

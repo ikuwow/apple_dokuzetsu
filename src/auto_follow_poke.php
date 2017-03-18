@@ -25,23 +25,24 @@ $pokes = array(
 );
 
 // フォロワーごとに回す
-foreach ( $followers_list->users as $itr => $usr) {
+foreach ($followers_list->users as $itr => $usr) {
     $cond = ( empty($friends_ids->ids) || !in_array($usr->id, $friends_ids->ids) )
         && !($usr->protected);
     if ($cond) {
-         $req_f = $to->post('friendships/create', ['user_id' => $usr->id]);
-         if ($req_f) {
-             $cnt_f += 1;
-            // リプライ
-             $reply = '@'.$usr->screen_name.' '.$pokes[mt_rand(0,count($pokes)-1)];
-              $req_r = $to->post('statuses/update',['status'=>$reply]);
-             if ($req_r) $cnt_r += 1;
+        $req_f = $to->post('friendships/create', ['user_id' => $usr->id]);
+        if ($req_f) {
+            $cnt_f += 1;
+            $reply = "@{$usr->screen_name} " . $pokes[mt_rand(0, count($pokes)-1)];
+            $req_r = $to->post('statuses/update', ['status'=>$reply]);
+            if ($req_r) {
+                $cnt_r += 1;
             }
-          if ($cnt_f == 30) break;
+        }
+        if ($cnt_f == 30) {
+            break;
+        }
     }
 }
 
 print "Auto followed $cnt_f user(s). \n";
 print "$cnt_r poke message(s) were send. \n";
-
-?>

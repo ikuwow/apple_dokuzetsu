@@ -3,7 +3,7 @@ require '_common.php';
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 
-print date("Y-m-d H:i:s")." Unfollowing start.\n";
+print date("Y-m-d H:i:s") . " Unfollowing start.\n";
 
 $to = new TwitterOAuth(
     getenv('CONSUMER_KEY'),
@@ -15,7 +15,7 @@ $to = new TwitterOAuth(
 $followers = $to->get('followers/ids', array('cursor' => -1));
 $friends = $to->get('friends/ids', array('cursor' => -1));
 
-foreach ( $friends->ids as $i => $id) {
+foreach ($friends->ids as $i => $id) {
     if (!in_array($id, $followers->ids)) {
         $req = $to->post('friendships/destroy', array('user_id' => $id));
         if ($req) {
@@ -27,5 +27,3 @@ foreach ( $friends->ids as $i => $id) {
 }
 
 print "Unfollowing end. \n";
-
-?>
