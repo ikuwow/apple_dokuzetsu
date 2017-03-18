@@ -1,14 +1,11 @@
 <?php
+require '_common.php';
+
+use Abraham\TwitterOAuth\TwitterOAuth;
 
 print date('Y-m-d H:i:s ');
 
 require_once("functions.php");
-
-require "vendor/autoload.php";
-use Abraham\TwitterOAuth\TwitterOAuth;
-
-$dotenv = new Dotenv\Dotenv(__DIR__);
-$dotenv->load();
 
 try {
     $dsn = 'mysql:host=' . getenv('DB_HOST') . ';dbname=' . getenv('DB_NAME');
@@ -20,10 +17,10 @@ try {
 }
 
 $to = new TwitterOAuth(
-	getenv('CONSUMER_KEY'),
-	getenv('CONSUMER_SECRET'),
-	getenv('ACCESS_TOKEN'),
-	getenv('ACCESS_TOKEN_SECRET')
+    getenv('CONSUMER_KEY'),
+    getenv('CONSUMER_SECRET'),
+    getenv('ACCESS_TOKEN'),
+    getenv('ACCESS_TOKEN_SECRET')
 );
 
 $stmt = $dbh->query('SELECT * FROM tweets ORDER BY ID');
