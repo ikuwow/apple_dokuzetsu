@@ -4,40 +4,29 @@
 // なので、オーダーがO(n)からO(log2(n))になる
 function binary_search($needle, $haystack)
 {
- $right = count($haystack)-1;
- $left = 0;
+    $right = count($haystack)-1;
+    $left = 0;
 
- // 左を示すポインタ($left)が右を示すポインタ($high)と同じ値か、
- // 大きい値となったとき、配列に対する$needleの相対位置が特定される
- while ( $left  < $right ){
-  // (int)をつけることで$midを整数値にする
-  $mid = (int)(($right + $left ) / 2);
-  if ($haystack[$mid] < $needle){
-   // 右半分へ
-   $left  = $mid + 1;
-  } else if ($haystack[$mid] > $needle) {
-   // 左半分へ
-   $right = $mid - 1;
-  } else {
-   // ちょうどぴったり
-   return $mid;
-  }
- // $haystackの中に$needleがない場合は、
- // この時点で$left > $rightになるのでループから抜ける
- }
+    while ( $left  < $right ){
+        $mid = (int)(($right + $left ) / 2);
+        if ($haystack[$mid] < $needle){
+            $left  = $mid + 1;
+        } else if ($haystack[$mid] > $needle) {
+            $right = $mid - 1;
+        } else {
+            return $mid;
+        }
+    }
 
- // ループ抜けたあとの判定
- if ( $left  != $right ){
-  // $low が$highを追い越した場合は$midの値が相対位置
-  return $mid;
- } else {
-  // $needle は $haystack[$low] の左に来るか右に来るか
-  if ($haystack[$left] >= $needle) {
-   return $left ;
-  } else {
-   return $left+1;
-  }
- }
+    if ( $left  != $right ){
+        return $mid;
+    } else {
+        if ($haystack[$left] >= $needle) {
+            return $left;
+        } else {
+            return $left+1;
+        }
+    }
 }
 
 // $lookup：$weights を加算していった配列
@@ -58,9 +47,6 @@ function weighted_random($weights, $lookup = null, $total_weight = null) {
   if ( $lookup == null ) {
     list($lookup, $total_weight) = calc_lookups($weights);
   }
-
   $rand = mt_rand(1,$total_weight);
-
   return binary_search($rand, $lookup);
-
 }
