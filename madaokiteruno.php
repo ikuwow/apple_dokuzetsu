@@ -1,7 +1,9 @@
 <?php
 
-require_once("twitteroauth/twitteroauth/twitteroauth.php");
+require "vendor/autoload.php";
 require_once("config.php");
+
+use Abraham\TwitterOAuth\TwitterOAuth;
 
 // OAuthオブジェクト生成
 $to = new TwitterOAuth(

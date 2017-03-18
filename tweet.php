@@ -2,10 +2,11 @@
 
 print date('Y-m-d H:i:s ');
 
-require_once("twitteroauth/twitteroauth/twitteroauth.php");
 require_once("functions.php");
 require_once("config.php");
 
+require "vendor/autoload.php";
+use Abraham\TwitterOAuth\TwitterOAuth;
 
 // MySQLに接続
 try {

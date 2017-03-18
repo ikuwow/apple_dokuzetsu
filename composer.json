@@ -1,0 +1,12 @@
+{
+    "name": "ikuwow/apple_dokuzetsu",
+    "authors": [
+        {
+            "name": "ikuwow",
+            "email": "degawa@ikuwow.com"
+        }
+    ],
+    "require": {
+        "abraham/twitteroauth": "^0.7.2"
+    }
+}

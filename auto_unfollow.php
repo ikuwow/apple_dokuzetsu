@@ -2,8 +2,10 @@
 print date("Y-m-d H:i:s")." Unfollowing start.\n";
 
 // twitteroauth.phpを読み込む。
-require_once("twitteroauth/twitteroauth/twitteroauth.php");
 require_once("config.php");
+
+require "vendor/autoload.php";
+use Abraham\TwitterOAuth\TwitterOAuth;
 
 // OAuthオブジェクト生成
 $to = new TwitterOAuth(
