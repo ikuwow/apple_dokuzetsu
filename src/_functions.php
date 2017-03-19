@@ -8,7 +8,7 @@ function binary_search($needle, $haystack)
     $left = 0;
 
     while ($left  < $right) {
-        $mid = (int)(($right + $left ) / 2);
+        $mid = (int)(($right + $left) / 2);
         if ($haystack[$mid] < $needle) {
             $left  = $mid + 1;
         } elseif ($haystack[$mid] > $needle) {
@@ -34,14 +34,14 @@ function binary_search($needle, $haystack)
 // こうすることで、weghts 配列をソートすることなく、昇順の配列が得られる
 function calc_lookups($weights)
 {
-    $lookup = array();
+    $lookup = [];
     $total_weight = 0;
 
     for ($i=0; $i < count($weights); $i++) {
         $total_weight += $weights[$i];
         $lookup[$i] = $total_weight;
     }
-    return array($lookup, $total_weight);
+    return [$lookup, $total_weight];
 }
 
 function weighted_random($weights, $lookup = null, $total_weight = null)

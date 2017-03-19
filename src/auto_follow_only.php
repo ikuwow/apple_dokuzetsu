@@ -19,7 +19,7 @@ $friends = $to->get('friends/ids');
 $counter = 0;
 foreach ($followers->ids as $i => $id) {
     if (empty($friends->ids) or !in_array($id, $friends->ids)) {
-        $req = $to->post('friendships/create', array('user_id' => $id));
+        $req = $to->post('friendships/create', ['user_id' => $id]);
         if ($req) {
             $counter = $counter +1;
         }

@@ -12,12 +12,12 @@ $to = new TwitterOAuth(
     getenv('ACCESS_TOKEN_SECRET')
 );
 
-$followers = $to->get('followers/ids', array('cursor' => -1));
-$friends = $to->get('friends/ids', array('cursor' => -1));
+$followers = $to->get('followers/ids', ['cursor' => -1]);
+$friends = $to->get('friends/ids', ['cursor' => -1]);
 
 foreach ($friends->ids as $i => $id) {
     if (!in_array($id, $followers->ids)) {
-        $req = $to->post('friendships/destroy', array('user_id' => $id));
+        $req = $to->post('friendships/destroy', ['user_id' => $id]);
         if ($req) {
             print "Unfollowed {$id}." . PHP_EOL;
         } else {

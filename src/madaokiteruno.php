@@ -11,4 +11,4 @@ $to = new TwitterOAuth(
 );
 
 $tweet = 'お兄ちゃん、まだ起きてるの？ 今日はKeynoteはなかったと思うけど。';
-$req = $to->post('statuses/update', array('status'=>$tweet));
+$req = $to->post('statuses/update', ['status' => $tweet]);

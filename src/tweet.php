@@ -25,13 +25,13 @@ $to = new TwitterOAuth(
 $stmt = $dbh->query('SELECT * FROM tweets ORDER BY ID');
 
 $tweets = $stmt->fetchAll();
-$nums = array();
+$nums = [];
 foreach ($tweets as $tweet) {
     $nums[] = $tweet['num_of_times'];
 }
 $max_weight = max($nums);
 
-$weights = array();
+$weights = [];
 foreach ($nums as $key => $num) {
     $weights[$key] = $max_weight-$num+1;
 }
@@ -39,11 +39,14 @@ foreach ($nums as $key => $num) {
 $tw_idx = weighted_random($weights);
 $tweet_id = $tw_idx+1;
 
-$req = $to->post('statuses/update', array('status'=>$tweets[$tw_idx]['tweet']));
+$req = $to->post('statuses/update', ['status'=>$tweets[$tw_idx]['tweet']]);
 
 $sql = 'UPDATE tweets set num_of_times = :num where ID = :id';
 $stmt = $dbh->prepare($sql);
-$stat = $stmt->execute(array(':num'=>$tweets[$tw_idx]['num_of_times']+1,':id'=>$tweet_id));
+$stat = $stmt->execute([
+    ':num' => $tweets[$tw_idx]['num_of_times'] + 1,
+    ':id'=>$tweet_id
+]);
 
 if ($stat) {
     $tmp = $tweets[$tw_idx]['num_of_times'] +1;

@@ -19,10 +19,10 @@ $followers_list = $to->get('followers/list');
 $cnt_f = 0;
 $cnt_r = 0;
 
-$pokes = array(
+$pokes = [
     'フォローしてくれてありがとうお兄ちゃん！ スティーブ・ジョブズみたいな人間を目指してこれからも頑張ってね！',
     'フォローしてくれてありがとうお兄ちゃん！ 今度Appleについてオールナイトで語り合いましょうね！'
-);
+];
 
 // フォロワーごとに回す
 foreach ($followers_list->users as $itr => $usr) {
