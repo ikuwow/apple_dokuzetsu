@@ -1,5 +1,3 @@
-config.php
-*.swp
-.env
-
 /vendor/
+.env
+data/apple_dokuzetsu.sqlite
