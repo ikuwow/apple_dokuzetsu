@@ -29,6 +29,6 @@ foreach ($followers->ids as $i => $id) {
     }
 }
 
-print "Auto followed $counter user(s). \n";
+print "Auto followed $counter user(s)." . PHP_EOL;
 $result = json_decode($req);
 var_dump($result);

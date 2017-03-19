@@ -47,7 +47,7 @@ $stat = $stmt->execute(array(':num'=>$tweets[$tw_idx]['num_of_times']+1,':id'=>$
 
 if ($stat) {
     $tmp = $tweets[$tw_idx]['num_of_times'] +1;
-    print "Tweet $tweet_id was incremented to $tmp.\n";
+    print "Tweet $tweet_id was incremented to $tmp" . PHP_EOL;
 } else {
     print "Cannot incremented.";
 }

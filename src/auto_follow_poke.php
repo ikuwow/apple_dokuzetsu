@@ -44,5 +44,5 @@ foreach ($followers_list->users as $itr => $usr) {
     }
 }
 
-print "Auto followed $cnt_f user(s). \n";
-print "$cnt_r poke message(s) were send. \n";
+print "Auto followed $cnt_f user(s)." . PHP_EOL;
+print "$cnt_r poke message(s) were send." . PHP_EOL;
