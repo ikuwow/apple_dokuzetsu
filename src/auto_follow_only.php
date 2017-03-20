@@ -5,7 +5,6 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 
 print date('Y-m-d H:i:s ');
 
-// OAuthオブジェクト生成
 $to = new TwitterOAuth(
     getenv('CONSUMER_KEY'),
     getenv('CONSUMER_SECRET'),

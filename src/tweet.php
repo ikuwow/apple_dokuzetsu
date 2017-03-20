@@ -1,6 +1,5 @@
 <?php
 require '_common.php';
-require '_functions.php';
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 
